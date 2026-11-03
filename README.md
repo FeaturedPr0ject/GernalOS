@@ -1,5 +1,10 @@
 # GernalOS
 
+> [!WARNING]
+> **AI-ASSISTED PROJECT — NOT HUMAN-VERIFIED.** This repository's documentation and some project materials have been created or edited with substantial AI assistance. Treat generated content, commands, configuration, and technical conclusions as unverified until independently checked on the target device. AI output may be incomplete or incorrect. The project is experimental and is not a ready-to-flash ROM.
+
+See [AI disclosure](docs/AI-DISCLOSURE.md) for details.
+
 **GernalOS** is a device-focused Android development project for the **Alcatel 3T8 (9032X), codename `Apollo_8_4G`**.
 
 The ROM concept is named **ApolloOS**. This repository is the project's development workspace for device research, documentation, and future bring-up work.
