@@ -1,0 +1,30 @@
+# Build output
+out/
+build/
+dist/
+target/
+.cache/
+*.log
+*.tmp
+
+# Local device images and backups
+*.img
+*.bin
+*.dtb
+*.dtbo
+*.img.gz
+*.zip
+*.tar
+*.tar.gz
+*.7z
+
+# Local-only configuration and private data
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+userdata/
+private/
+local-backups/
