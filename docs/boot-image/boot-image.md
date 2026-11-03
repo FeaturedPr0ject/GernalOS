@@ -6,8 +6,8 @@ Two images were supplied for the Alcatel 9032X / Apollo_8_4G project:
 
 | Image | Size | SHA-256 |
 |---|---:|---|
-| `boot_full_32MiB(4).img` | 33,554,432 bytes (32 MiB) | `bc05cd6065d3d1f59c44a46d68867e4ddfe3c3c0b7360ef480d9e7f6b8b06972` |
-| `recovery_9032X(2).img` | 33,554,432 bytes (32 MiB) | `fea18b7c5c771054aec49559b09162be56dcc504667866fb2ffed54618886c07` |
+| `boot.img` | 33,554,432 bytes (32 MiB) | `bc05cd6065d3d1f59c44a46d68867e4ddfe3c3c0b7360ef480d9e7f6b8b06972` |
+| `recovery.img` | 33,554,432 bytes (32 MiB) | `fea18b7c5c771054aec49559b09162be56dcc504667866fb2ffed54618886c07` |
 
 Both images begin with Android boot magic `ANDROID!`, report boot header version 2, and use a 2048-byte page size.
 
@@ -15,7 +15,7 @@ These hashes identify the exact uploaded files. Keep the originals unchanged in 
 
 ## Boot image
 
-File: `boot_full_32MiB(4).img`
+File: `boot.img`
 
 | Field | Observed |
 |---|---:|
@@ -42,7 +42,7 @@ This matches the extracted `apollo_boot_base.dtb` byte-for-byte.
 
 ## Recovery image
 
-File: `recovery_9032X(2).img`
+File: `recovery.img`
 
 | Field | Observed |
 |---|---:|
