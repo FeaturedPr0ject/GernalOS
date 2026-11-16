@@ -1,0 +1,21 @@
+#!/system/bin/sh
+echo "===== SYSTEM ====="
+getprop ro.product.model
+getprop ro.build.version.release
+getprop ro.build.display.id
+echo
+echo "===== KERNEL ====="
+uname -a
+echo
+echo "===== CPU ====="
+grep -m 1 "Hardware" /proc/cpuinfo
+grep -m 1 "processor" /proc/cpuinfo
+echo
+echo "===== MEMORY ====="
+cat /proc/meminfo | head -12
+echo
+echo "===== STORAGE ====="
+df -h /data /system
+echo
+echo "===== SELINUX ====="
+getenforce
