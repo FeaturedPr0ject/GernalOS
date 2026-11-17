@@ -31,6 +31,18 @@ jobs:
         working-directory: termux-packages
         run: docker build --tag gernaIos-package-builder ./scripts
 
+      - name: Verify Android NDK installation
+        run: |
+          set -euo pipefail
+          docker run --rm gernaIos-package-builder bash -lc '
+            set -euo pipefail
+            NDK_DIR="/home/builder/lib/android-ndk-r28c"
+            test -d "$NDK_DIR"
+            test -x "$NDK_DIR/toolchains/llvm/prebuilt/linux-x86_64/bin/clang"
+            echo "Android NDK directory: $NDK_DIR"
+            "$NDK_DIR/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" --version
+          '
+
       - name: Build ARM32 bootstrap
         working-directory: termux-packages
         shell: bash
