@@ -1,0 +1,63 @@
+name: GernalOS ARM32 Bootstrap
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-arm32:
+    name: Build ARM32 bootstrap
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    steps:
+      - name: Checkout Termux package build source
+        uses: actions/checkout@v4
+        with:
+          repository: agnostic-apollo/termux-packages
+          ref: infra-improvs
+          path: termux-packages
+
+      - name: Configure GernalOS package identity
+        working-directory: termux-packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          sed -i 's/^TERMUX_APP__PACKAGE_NAME=.*/TERMUX_APP__PACKAGE_NAME="com.coneui.gernelterminal"/' scripts/properties.sh
+          grep -n '^TERMUX_APP__PACKAGE_NAME=' scripts/properties.sh
+
+      - name: Build ARM32 bootstrap
+        working-directory: termux-packages
+        shell: bash
+        env:
+          CI: "true"
+        run: |
+          set -o pipefail
+          ./scripts/run-docker.sh ./scripts/build-bootstraps.sh --android10 --architectures arm --no-build-unneeded-subpackages 2>&1 | tee build.log
+
+      - name: Report output size
+        working-directory: termux-packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s bootstrap-arm.zip
+          ls -lh bootstrap-arm.zip
+          sha256sum bootstrap-arm.zip
+
+      - name: Upload ARM32 bootstrap
+        uses: actions/upload-artifact@v4
+        with:
+          name: GernalOS-ARM32-Bootstrap
+          path: termux-packages/bootstrap-arm.zip
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: GernalOS-ARM32-Build-Log
+          path: termux-packages/build.log
+          if-no-files-found: ignore
+          retention-days: 7
