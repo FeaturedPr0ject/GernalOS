@@ -27,11 +27,16 @@ jobs:
           sed -i 's/^TERMUX_APP__PACKAGE_NAME=.*/TERMUX_APP__PACKAGE_NAME="com.coneui.gernelterminal"/' scripts/properties.sh
           grep -n '^TERMUX_APP__PACKAGE_NAME=' scripts/properties.sh
 
+      - name: Build matching package-builder image
+        working-directory: termux-packages
+        run: docker build --tag gernaIos-package-builder ./scripts
+
       - name: Build ARM32 bootstrap
         working-directory: termux-packages
         shell: bash
         env:
           CI: "true"
+          TERMUX_BUILDER_IMAGE_NAME: gernaIos-package-builder
         run: |
           set -o pipefail
           ./scripts/run-docker.sh ./scripts/build-bootstraps.sh --android10 --architectures arm --no-build-unneeded-subpackages 2>&1 | tee build.log
